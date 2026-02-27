@@ -5,88 +5,100 @@
 <title>Приглашение для Ксюньки</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background: radial-gradient(circle at bottom, #0a1a2f, #050510 70%);
-        font-family: 'Cormorant Garamond', serif;
-        color:white;
-        overflow:hidden;
-        position:relative;
-    }
-    body::before {
-        content:"";
-        position:absolute;
-        width:200%;
-        height:200%;
-        background-image: radial-gradient(white 1px, transparent 1px);
-        background-size: 50px 50px;
-        opacity:0.15;
-        animation: stars 120s linear infinite;
-    }
-    @keyframes stars { from{transform:translateY(0);} to{transform:translateY(-500px);} }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    .envelope-wrapper {
-        position:relative;
-        width:340px;
-        height:220px;
-        cursor:pointer;
-        perspective:1000px;
-        z-index:1;
-    }
-    .envelope { width:100%; height:100%; position:relative; }
-    .flap {
-        position:absolute;
-        width:100%;
-        height:100%;
-        background: linear-gradient(145deg, #1c2b45, #111a2e);
-        clip-path: polygon(0 0, 100% 0, 50% 55%);
-        transform-origin: top;
-        transition: transform 1s ease;
-        z-index:3;
-    }
-    .body-envelope {
-        position:absolute;
-        width:100%;
-        height:100%;
-        background: linear-gradient(145deg, #16223b, #0f1628);
-        border-radius:10px;
-        z-index:2;
-    }
+body {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at bottom, #0a1a2f, #050510 70%);
+    font-family: 'Cormorant Garamond', serif;
+    color:white;
+    overflow:hidden;
+}
 
-    .letter {
-        position:fixed; /* важно: fixed, чтобы поверх всего */
-        top:50%;
-        left:50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        width:600px;
-        max-width:90vw;
-        background: rgba(10,20,40,0.95);
-        backdrop-filter: blur(10px);
-        padding:50px;
-        border-radius:20px;
-        text-align:center;
-        box-shadow:0 0 60px rgba(0,150,255,0.3);
-        opacity:0;
-        transition: all 1s ease;
-        z-index:10;
-    }
-    h1 { font-family: 'Great Vibes', cursive; font-size:52px; margin-bottom:20px; color:#ffd6e7; }
-    p { font-size:22px; line-height:1.7; margin-bottom:25px; }
-    .details { margin-top:30px; font-size:20px; opacity:0.9; }
+/* Звезды */
+body::before {
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity:0.15;
+    animation: stars 120s linear infinite;
+}
+@keyframes stars { from{transform:translateY(0);} to{transform:translateY(-500px);} }
 
-    .open .flap { transform: rotateX(180deg); }
-    .open .letter { opacity:1; transform: translate(-50%, -50%) scale(1); }
+/* Конверт */
+.envelope-wrapper {
+    position:relative;
+    width:340px;
+    height:220px;
+    cursor:pointer;
+    perspective:1000px;
+    z-index:1;
+}
+.envelope { width:100%; height:100%; position:relative; }
+.flap {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: linear-gradient(145deg, #1c2b45, #111a2e);
+    clip-path: polygon(0 0, 100% 0, 50% 55%);
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index:3;
+}
+.body-envelope {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: linear-gradient(145deg, #16223b, #0f1628);
+    border-radius:10px;
+    z-index:2;
+}
+.hint {
+    position:absolute;
+    bottom:-35px;
+    width:100%;
+    text-align:center;
+    font-size:14px;
+    opacity:0.6;
+}
 
-    .hint { position:absolute; bottom:-35px; width:100%; text-align:center; font-size:14px; opacity:0.6; }
+/* Письмо */
+.letter {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(0.8);
+    width:600px;
+    max-width:90vw;
+    background: rgba(10,20,40,0.95);
+    backdrop-filter: blur(10px);
+    padding:50px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 60px rgba(0,150,255,0.3);
+    opacity:0;
+    transition: all 1s ease;
+    z-index:10;
+}
+h1 { font-family: 'Great Vibes', cursive; font-size:52px; margin-bottom:20px; color:#ffd6e7; }
+p { font-size:22px; line-height:1.7; margin-bottom:25px; }
+.details { margin-top:30px; font-size:20px; opacity:0.9; }
+
+/* Открытие */
+.open .flap { transform: rotateX(180deg); }
+.open-letter { opacity:1; transform:translate(-50%, -50%) scale(1); }
+
 </style>
 </head>
 <body>
 
-<div class="envelope-wrapper" onclick="openLetter()">
+<div class="envelope-wrapper" id="envelope">
     <div class="envelope">
         <div class="flap"></div>
         <div class="body-envelope"></div>
@@ -94,23 +106,24 @@
     <div class="hint">Нажми, чтобы открыть</div>
 </div>
 
+<!-- Письмо вне конверта -->
 <div class="letter" id="letter">
     <h1>Дорогая Ксюнька!</h1>
 
     <p>
-        Приглашаю тебя на вечерне-ночную прогулку по барам.  
+        Приглашаю тебя на вечерне-ночную прогулку по барам.<br>
         Будем пить, курить и наслаждаться вайбом ночного города.
     </p>
 
     <p>
-        А под утро — уйдём к воде.  
-        Сядем где-нибудь на пляже (если будет) или в парке  
-        с бутылкой вина и будем говорить по душам,  
+        А под утро — уйдём к воде.<br>
+        Сядем где-нибудь на пляже (если будет) или в парке<br>
+        с бутылкой вина и будем говорить по душам,<br>
         слушая шум волн и тишину рассвета.
     </p>
 
     <p>
-        И в конце нежно поцелуемся  
+        И в конце нежно поцелуемся<br>
         и долго будем сидеть в тёплых объятиях.
     </p>
 
@@ -123,10 +136,10 @@
 </div>
 
 <script>
-function openLetter(){
-    document.querySelector('.envelope-wrapper').classList.add('open');
-    document.getElementById('letter').classList.add('open');
-}
+document.getElementById('envelope').addEventListener('click', function() {
+    document.querySelector('.flap').classList.add('open');
+    document.getElementById('letter').classList.add('open-letter');
+});
 </script>
 
 </body>
