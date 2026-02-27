@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Приглашение для Ксюньки</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+    * { box-sizing: border-box; margin:0; padding:0; }
+
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at bottom, #0a1a2f, #050510 70%);
+        font-family: 'Cormorant Garamond', serif;
+        color: white;
+        overflow: hidden;
+    }
+
+    /* Звёзды на фоне */
+    body::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background-image: radial-gradient(white 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.15;
+        animation: stars 120s linear infinite;
+    }
+
+    @keyframes stars {
+        from { transform: translateY(0); }
+        to { transform: translateY(-500px); }
+    }
+
+    .envelope-wrapper {
+        position: relative;
+        width: 340px;
+        height: 220px;
+        cursor: pointer;
+        perspective: 1000px;
+    }
+
+    .envelope {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .flap {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, #1c2b45, #111a2e);
+        clip-path: polygon(0 0, 100% 0, 50% 55%);
+        transform-origin: top;
+        transition: transform 1s ease;
+        z-index: 3;
+    }
+
+    .body-envelope {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, #16223b, #0f1628);
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .letter {
+        position: absolute;
+        width: 600px;
+        max-width: 90vw;
+        background: rgba(10, 20, 40, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 50px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 0 60px rgba(0, 150, 255, 0.3);
+        transform: translateY(50px) scale(0.8);
+        opacity: 0;
+        transition: all 1.2s ease;
+        z-index: 0;
+    }
+
+    h1 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 52px;
+        margin-bottom: 20px;
+        color: #ffd6e7;
+    }
+
+    p {
+        font-size: 22px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+    }
+
+    .details {
+        margin-top: 30px;
+        font-size: 20px;
+        opacity: 0.9;
+    }
+
+    .open .flap {
+        transform: rotateX(180deg);
+    }
+
+    .open .letter {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    .hint {
+        position: absolute;
+        bottom: -35px;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="envelope-wrapper" onclick="openLetter()">
+    <div class="envelope">
+        <div class="flap"></div>
+        <div class="body-envelope"></div>
+    </div>
+    <div class="hint">Нажми, чтобы открыть</div>
+</div>
+
+<div class="letter" id="letter">
+    <h1>Дорогая Ксюнька!</h1>
+
+    <p>
+        Приглашаю тебя на вечерне-ночную прогулку по барам.  
+        Будем пить, курить и наслаждаться вайбом ночного города.
+    </p>
+
+    <p>
+        А под утро — уйдём к воде.  
+        Сядем где-нибудь на пляже (если будет) или в парке  
+        с бутылкой вина и будем говорить по душам,  
+        слушая шум волн и тишину рассвета.
+    </p>
+
+    <p>
+        И в конце нежно поцелуемся  
+        и долго будем сидеть в тёплых объятиях.
+    </p>
+
+    <div class="details">
+        📅 13.03.26 <br>
+        ⏰ 20:00 <br>
+        📍 На нашем любимом месте <br><br>
+        Буду ждать...
+    </div>
+</div>
+
+<script>
+function openLetter() {
+    document.querySelector('.envelope-wrapper').classList.add('open');
+    document.getElementById('letter').classList.add('open');
+}
+</script>
+
+</body>
+</html>
