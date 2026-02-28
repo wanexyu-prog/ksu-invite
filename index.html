@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Приглашение</title>
-
 <style>
 body {
     margin: 0;
@@ -65,6 +64,7 @@ p {
 .date {
     margin-top: 20px;
     font-weight: bold;
+    font-size: 15px;
 }
 
 button {
@@ -77,9 +77,25 @@ button {
     color: white;
     cursor: pointer;
 }
+
+/* Анимация звезд */
+body::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(white 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.1;
+    animation: stars 60s linear infinite;
+}
+
+@keyframes stars {
+    from { transform: translateY(0); }
+    to { transform: translateY(-500px); }
+}
 </style>
 </head>
-
 <body>
 
 <div class="sun"></div>
@@ -108,7 +124,6 @@ button {
 function startSunrise() {
     document.body.classList.add("sunrise");
     document.getElementById("waves").play();
-
     setTimeout(function() {
         window.location.href = "mailto:?subject=Приглашение&body=Дорогая%20Ксюнька!%0A%0AПриглашаю%20тебя%20на%20вечерне-ночную%20прогулку%20по%20барам.%20Будем%20пить,%20курить%20и%20вайбово%20проводить%20время,%20а%20под%20утро%20встретим%20рассвет%20на%20пляже%20с%20бутылкой%20вина%20и%20разговорами%20по%20душам.%0A%0AБуду%20ждать!%0AДата:%2013.03.26%20в%2020:00%0AНаше%20любимое%20место.";
     }, 6000);
@@ -117,3 +132,4 @@ function startSunrise() {
 
 </body>
 </html>
+
