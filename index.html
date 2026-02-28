@@ -2,144 +2,117 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Приглашение для Ксюньки</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Приглашение</title>
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
 body {
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: radial-gradient(circle at bottom, #0a1a2f, #050510 70%);
-    font-family: 'Cormorant Garamond', serif;
-    color:white;
-    overflow:hidden;
+    margin: 0;
+    font-family: 'Georgia', serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+    transition: background 6s ease;
 }
 
-/* Звезды */
-body::before {
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
-    background-image: radial-gradient(white 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity:0.15;
-    animation: stars 120s linear infinite;
-}
-@keyframes stars { from{transform:translateY(0);} to{transform:translateY(-500px);} }
-
-/* Конверт */
-.envelope-wrapper {
-    position:relative;
-    width:340px;
-    height:220px;
-    cursor:pointer;
-    perspective:1000px;
-    z-index:1;
-}
-.envelope { width:100%; height:100%; position:relative; }
-.flap {
-    position:absolute;
-    width:100%;
-    height:100%;
-    background: linear-gradient(145deg, #1c2b45, #111a2e);
-    clip-path: polygon(0 0, 100% 0, 50% 55%);
-    transform-origin: top;
-    transition: transform 1s ease;
-    z-index:3;
-}
-.body-envelope {
-    position:absolute;
-    width:100%;
-    height:100%;
-    background: linear-gradient(145deg, #16223b, #0f1628);
-    border-radius:10px;
-    z-index:2;
-}
-.hint {
-    position:absolute;
-    bottom:-35px;
-    width:100%;
-    text-align:center;
-    font-size:14px;
-    opacity:0.6;
+/* Рассвет */
+.sunrise {
+    background: linear-gradient(to top, #ff9966, #ff5e62);
 }
 
-/* Письмо */
-.letter {
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%) scale(0.8);
-    width:600px;
-    max-width:90vw;
-    background: rgba(10,20,40,0.95);
-    backdrop-filter: blur(10px);
-    padding:50px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0 0 60px rgba(0,150,255,0.3);
-    opacity:0;
-    transition: all 1s ease;
-    z-index:10;
+/* Солнце */
+.sun {
+    position: absolute;
+    bottom: -150px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #ffd27f 0%, #ff8c42 60%, transparent 70%);
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: bottom 6s ease;
 }
-h1 { font-family: 'Great Vibes', cursive; font-size:52px; margin-bottom:20px; color:#ffd6e7; }
-p { font-size:22px; line-height:1.7; margin-bottom:25px; }
-.details { margin-top:30px; font-size:20px; opacity:0.9; }
 
-/* Открытие */
-.open .flap { transform: rotateX(180deg); }
-.open-letter { opacity:1; transform:translate(-50%, -50%) scale(1); }
+.sunrise .sun {
+    bottom: 20%;
+}
 
+/* Карточка */
+.card {
+    position: relative;
+    width: 90%;
+    max-width: 380px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+h1 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+}
+
+p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.date {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+button {
+    margin-top: 25px;
+    padding: 12px 22px;
+    font-size: 15px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    color: white;
+    cursor: pointer;
+}
 </style>
 </head>
+
 <body>
 
-<div class="envelope-wrapper" id="envelope">
-    <div class="envelope">
-        <div class="flap"></div>
-        <div class="body-envelope"></div>
+<div class="sun"></div>
+
+<div class="card">
+    <h1>Дорогая Ксюнька 🌙</h1>
+    <p>
+        Ночь начинается с лёгкого бокала…  
+        А закончится рассветом на пляже  
+        и разговором по душам.
+    </p>
+
+    <div class="date">
+        13.03.26 • 20:00<br>
+        Наше любимое место
     </div>
-    <div class="hint">Нажми, чтобы открыть</div>
+
+    <button onclick="startSunrise()">Начать рассвет 🌅</button>
 </div>
 
-<!-- Письмо вне конверта -->
-<div class="letter" id="letter">
-    <h1>Дорогая Ксюнька!</h1>
-
-    <p>
-        Приглашаю тебя на вечерне-ночную прогулку по барам.<br>
-        Будем пить, курить и наслаждаться вайбом ночного города.
-    </p>
-
-    <p>
-        А под утро — уйдём к воде.<br>
-        Сядем где-нибудь на пляже (если будет) или в парке<br>
-        с бутылкой вина и будем говорить по душам,<br>
-        слушая шум волн и тишину рассвета.
-    </p>
-
-    <p>
-        И в конце нежно поцелуемся<br>
-        и долго будем сидеть в тёплых объятиях.
-    </p>
-
-    <div class="details">
-        📅 13.03.26 <br>
-        ⏰ 20:00 <br>
-        📍 На нашем любимом месте <br><br>
-        Буду ждать...
-    </div>
-</div>
+<audio id="waves" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b61c4.mp3?filename=ocean-waves-112906.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-document.getElementById('envelope').addEventListener('click', function() {
-    document.querySelector('.flap').classList.add('open');
-    document.getElementById('letter').classList.add('open-letter');
-});
+function startSunrise() {
+    document.body.classList.add("sunrise");
+    document.getElementById("waves").play();
+
+    setTimeout(function() {
+        window.location.href = "mailto:?subject=Приглашение&body=Дорогая%20Ксюнька!%0A%0AПриглашаю%20тебя%20на%20вечерне-ночную%20прогулку%20по%20барам.%20Будем%20пить,%20курить%20и%20вайбово%20проводить%20время,%20а%20под%20утро%20встретим%20рассвет%20на%20пляже%20с%20бутылкой%20вина%20и%20разговорами%20по%20душам.%0A%0AБуду%20ждать!%0AДата:%2013.03.26%20в%2020:00%0AНаше%20любимое%20место.";
+    }, 6000);
+}
 </script>
 
 </body>
