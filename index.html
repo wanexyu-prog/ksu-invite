@@ -1,142 +1,132 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Для Ксюньки</title>
+<title>Для Ксюньки 💛</title>
 
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: Georgia, serif;
-    background: black;
-    color: white;
-    height: 100%;
+html,body{
+margin:0;
+padding:0;
+height:100%;
+overflow:hidden;
+font-family:Georgia,serif;
+background:black;
+color:white;
 }
 
-/* Кнопка */
-#openBtn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px 50px;
-    font-size: 22px;
-    background: transparent;
-    color: #fff;
-    border: 2px solid #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
+/* КНОПКА */
+#openBtn{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:20px 50px;
+font-size:20px;
+border-radius:40px;
+border:2px solid white;
+background:black;
+color:white;
+z-index:10;
 }
 
-#openBtn:active {
-    transform: translate(-50%, -50%) scale(0.95);
+/* СЦЕНА */
+.scene{
+position:fixed;
+inset:0;
+opacity:0;
+transition:opacity 2s ease;
+background:radial-gradient(circle at 50% 80%, #0a0a1f 0%, #000 70%);
 }
 
-/* Сцена */
-.scene {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 2s ease;
-    background: radial-gradient(circle at 50% 80%, #0a0a1f 0%, #000 70%);
+/* ЗВЁЗДЫ */
+.stars{
+position:absolute;
+width:100%;
+height:100%;
 }
 
-/* Звезды */
-.stars::after {
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    box-shadow:
-        5vw 20vh white,
-        30vw 10vh white,
-        60vw 40vh white,
-        80vw 15vh white,
-        50vw 60vh white,
-        20vw 50vh white;
-    animation: twinkle 2s infinite alternate;
+.stars::after{
+content:"";
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+box-shadow:
+10vw 20vh white,
+30vw 10vh white,
+60vw 40vh white,
+80vw 15vh white,
+50vw 60vh white,
+20vw 50vh white;
+animation:twinkle 2s infinite alternate;
 }
 
-@keyframes twinkle {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
+@keyframes twinkle{
+from{opacity:0.4;}
+to{opacity:1;}
 }
 
-/* Солнце */
-.sun {
-    position: absolute;
-    bottom: -180px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 55vw;
-    height: 55vw;
-    max-width: 300px;
-    max-height: 300px;
-    background: radial-gradient(circle, #ffd27f 0%, #ff944d 60%, transparent 70%);
-    border-radius: 50%;
-    animation: sunrise 10s forwards;
-    animation-delay: 3s;
+/* СОЛНЦЕ */
+.sun{
+position:absolute;
+bottom:-180px;
+left:50%;
+transform:translateX(-50%);
+width:60vw;
+height:60vw;
+max-width:260px;
+max-height:260px;
+background:radial-gradient(circle,#ffd27f 0%,#ff944d 60%,transparent 70%);
+border-radius:50%;
+transition:bottom 8s ease;
 }
 
-@keyframes sunrise {
-    to { bottom: 28%; }
+/* РАССВЕТ */
+.dawn{
+background:linear-gradient(to top,#ff9966,#ff5e62,#3a1c71);
+transition:background 10s ease;
 }
 
-/* Рассвет */
-.dawn {
-    animation: skyChange 12s forwards;
+/* БЕРЕГ */
+.beach{
+position:absolute;
+bottom:0;
+width:100%;
+height:20vh;
+background:linear-gradient(to top,#111,transparent);
 }
 
-@keyframes skyChange {
-    0% { background: radial-gradient(circle at 50% 80%, #0a0a1f 0%, #000 70%); }
-    100% { background: linear-gradient(to top, #ff9966, #ff5e62, #3a1c71); }
+/* ТЕКСТ */
+.letter{
+position:absolute;
+top:55%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90%;
+max-width:500px;
+text-align:center;
+font-size:4.5vw;
+line-height:1.6;
+white-space:pre-line;
 }
 
-/* Берег */
-.beach {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 18vh;
-    background: linear-gradient(to top, #111, transparent);
+@media (min-width:600px){
+.letter{font-size:18px;}
 }
 
-/* Письмо */
-.letter {
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    font-size: 4.5vw;
-    line-height: 1.6;
-    white-space: pre-line;
+/* КУРСОР */
+.cursor{
+display:inline-block;
+width:2px;
+background:white;
+animation:blink 1s infinite;
 }
 
-@media (min-width: 600px) {
-    .letter {
-        font-size: 18px;
-    }
-}
-
-/* Курсор */
-.cursor {
-    display: inline-block;
-    width: 2px;
-    background: white;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
+@keyframes blink{
+50%{opacity:0;}
 }
 </style>
 </head>
@@ -146,17 +136,11 @@ html, body {
 <button id="openBtn">Открыть письмо ✨</button>
 
 <div class="scene" id="scene">
-    <div class="stars"></div>
-    <div class="sun"></div>
-    <div class="beach"></div>
-    <div class="letter">
-        <span id="text"></span><span class="cursor"></span>
-    </div>
+<div class="stars"></div>
+<div class="sun" id="sun"></div>
+<div class="beach"></div>
+<div class="letter"><span id="text"></span><span class="cursor"></span></div>
 </div>
-
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4bfae0c9a5.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 const message = `Дорогая Ксюнька...
@@ -166,11 +150,13 @@ const message = `Дорогая Ксюнька...
 
 А под утро найдём тихое место —
 может пляж, может парк,
-бутылка вина, разговоры по душам.
+бутылка вина,
+разговоры по душам.
 
 Первый луч солнца.
 Нежный поцелуй.
 Тёплые объятия.
+И ощущение, что эта ночь была только нашей.
 
 13.03.26
 20:00
@@ -178,27 +164,30 @@ const message = `Дорогая Ксюнька...
 
 Буду ждать. 💛`;
 
-const textElement = document.getElementById("text");
-const button = document.getElementById("openBtn");
+const btn = document.getElementById("openBtn");
 const scene = document.getElementById("scene");
-const music = document.getElementById("music");
+const sun = document.getElementById("sun");
+const textElement = document.getElementById("text");
 
-button.addEventListener("click", () => {
-    button.style.display = "none";
-    scene.style.opacity = "1";
-    scene.classList.add("dawn");
-    music.play();
-    typeWriter();
-});
+btn.onclick = function(){
+btn.style.display="none";
+scene.style.opacity="1";
 
-let i = 0;
-function typeWriter() {
-    if (i < message.length) {
-        textElement.innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeWriter, 35);
-    }
+setTimeout(()=>{
+scene.classList.add("dawn");
+sun.style.bottom="30%";
+},1000);
+
+let i=0;
+function typing(){
+if(i<message.length){
+textElement.innerHTML+=message[i];
+i++;
+setTimeout(typing,35);
 }
+}
+setTimeout(typing,2000);
+};
 </script>
 
 </body>
