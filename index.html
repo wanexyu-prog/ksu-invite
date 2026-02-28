@@ -3,155 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <title>Приглашение</title>
+
 <style>
-    body {
-        margin: 0;
-        font-family: 'Georgia', serif;
-        overflow: hidden;
-        background: black;
-        color: white;
-    }
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+    background: black;
+    color: white;
+}
 
-    a {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 24px;
-        color: #ffd;
-        text-decoration: none;
-        border: 1px solid #ffd;
-        padding: 15px 30px;
-        border-radius: 30px;
-        transition: 0.3s;
-    }
+#openBtn {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #ffd;
+    background: transparent;
+    border: 1px solid #ffd;
+    padding: 15px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    a:hover {
-        background: #ffd;
-        color: black;
-    }
+#openBtn:hover {
+    background: #ffd;
+    color: black;
+}
 
-    .scene {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: radial-gradient(circle at 50% 80%, #111 0%, #000 60%);
-        overflow: hidden;
-        opacity: 0;
-        transition: opacity 2s ease;
-    }
+.scene {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 80%, #111 0%, #000 60%);
+    opacity: 0;
+    transition: opacity 2s ease;
+}
 
-    .stars {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: transparent;
-    }
+.stars::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow:
+        100px 200px white,
+        300px 400px white,
+        500px 100px white,
+        800px 300px white,
+        1200px 150px white,
+        700px 500px white,
+        400px 600px white;
+}
 
-    .stars::after {
-        content: "";
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: white;
-        box-shadow:
-            100px 200px white,
-            300px 400px white,
-            500px 100px white,
-            800px 300px white,
-            1200px 150px white,
-            700px 500px white,
-            400px 600px white;
-    }
+.sun {
+    position: absolute;
+    bottom: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #ffcc66 0%, #ff9933 60%, transparent 70%);
+    border-radius: 50%;
+    animation: sunrise 8s forwards;
+    animation-delay: 3s;
+}
 
-    .sun {
-        position: absolute;
-        bottom: -150px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(circle, #ffcc66 0%, #ff9933 60%, transparent 70%);
-        border-radius: 50%;
-        animation: sunrise 8s forwards;
-        animation-delay: 3s;
-    }
+@keyframes sunrise {
+    0% { bottom: -150px; opacity: 0; }
+    100% { bottom: 30%; opacity: 1; }
+}
 
-    @keyframes sunrise {
-        0% { bottom: -150px; opacity: 0; }
-        100% { bottom: 30%; opacity: 1; }
-    }
+.dawn {
+    animation: skyChange 10s forwards;
+}
 
-    .letter {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 70%;
-        max-width: 700px;
-        text-align: center;
-        opacity: 0;
-        animation: fadeIn 4s forwards;
-        animation-delay: 5s;
-    }
+@keyframes skyChange {
+    0% { background: radial-gradient(circle at 50% 80%, #111 0%, #000 60%); }
+    100% { background: linear-gradient(to top, #ff9966, #ff5e62, #3a1c71); }
+}
 
-    @keyframes fadeIn {
-        to { opacity: 1; }
-    }
+.letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 700px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 4s forwards;
+    animation-delay: 5s;
+}
 
-    .dawn {
-        animation: skyChange 10s forwards;
-        animation-delay: 3s;
-    }
-
-    @keyframes skyChange {
-        0% { background: radial-gradient(circle at 50% 80%, #111 0%, #000 60%); }
-        100% { background: linear-gradient(to top, #ff9966, #ff5e62, #3a1c71); }
-    }
-
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
 </style>
 </head>
+
 <body>
 
-<a href="#" onclick="start()">Открыть письмо ✨</a>
+<button id="openBtn">Открыть письмо ✨</button>
 
 <div class="scene" id="scene">
     <div class="stars"></div>
     <div class="sun"></div>
+
     <div class="letter">
         <h1>Дорогая Ксюнька!</h1>
         <p>
             Приглашаю тебя на вечерне-ночную прогулку по барам.
             Будем пить, курить и вайбово проводить время,
-            а под утро сядем где-нибудь на пляже (если будет) или в парке с бутылкой вина,
-            и будем разговаривать по душам.
+            а под утро сядем где-нибудь на пляже (если будет) или в парке
+            с бутылкой вина и будем разговаривать по душам.
         </p>
+
         <p>
-            А в конце нежно поцелуемся и долго будем сидеть в теплых объятиях,
-            пока первые лучи солнца не скажут нам, что ночь была не зря.
+            А потом — нежный поцелуй, тёплые объятия
+            и ощущение, что ночь принадлежала только нам.
         </p>
+
         <p>
-            Это будет не просто прогулка — это будет маленькая история,
-            которую захочется вспоминать снова и снова.
+            Пусть этот рассвет станет началом чего-то особенного.
         </p>
-        <p><strong>Дата: 13.03.26<br>
-        Время: 20:00<br>
-        На нашем любимом месте.</strong></p>
-        <p>Буду ждать. 💛</p>
+
+        <p><strong>
+            13.03.26<br>
+            20:00<br>
+            На нашем любимом месте.
+        </strong></p>
+
+        <p>Буду ждать 💛</p>
     </div>
 </div>
 
 <script>
-function start() {
-    document.querySelector("a").style.display = "none";
-    let scene = document.getElementById("scene");
+document.getElementById("openBtn").addEventListener("click", function() {
+    this.style.display = "none";
+    const scene = document.getElementById("scene");
     scene.style.opacity = "1";
     scene.classList.add("dawn");
-}
+});
 </script>
 
 </body>
 </html>
+
+</body>
+</html>
+
 
