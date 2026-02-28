@@ -2,15 +2,18 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Для Ксюньки</title>
 
 <style>
-body {
+html, body {
     margin: 0;
+    padding: 0;
     overflow: hidden;
-    font-family: 'Georgia', serif;
+    font-family: Georgia, serif;
     background: black;
     color: white;
+    height: 100%;
 }
 
 /* Кнопка */
@@ -19,18 +22,18 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 18px 40px;
-    font-size: 26px;
+    padding: 20px 50px;
+    font-size: 22px;
     background: transparent;
     color: #fff;
     border: 2px solid #fff;
-    border-radius: 40px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: 0.4s;
+    transition: 0.3s;
 }
-#openBtn:hover {
-    background: white;
-    color: black;
+
+#openBtn:active {
+    transform: translate(-50%, -50%) scale(0.95);
 }
 
 /* Сцена */
@@ -43,13 +46,7 @@ body {
     background: radial-gradient(circle at 50% 80%, #0a0a1f 0%, #000 70%);
 }
 
-/* Звёзды */
-.stars {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-}
+/* Звезды */
 .stars::after {
     content: "";
     position: absolute;
@@ -57,41 +54,45 @@ body {
     height: 2px;
     background: white;
     box-shadow:
-        100px 200px white,
-        300px 100px white,
-        600px 400px white,
-        900px 150px white,
-        1200px 350px white,
-        500px 600px white,
-        800px 500px white;
+        5vw 20vh white,
+        30vw 10vh white,
+        60vw 40vh white,
+        80vw 15vh white,
+        50vw 60vh white,
+        20vw 50vh white;
     animation: twinkle 2s infinite alternate;
 }
+
 @keyframes twinkle {
-    from { opacity: 0.3; }
+    from { opacity: 0.4; }
     to { opacity: 1; }
 }
 
 /* Солнце */
 .sun {
     position: absolute;
-    bottom: -200px;
+    bottom: -180px;
     left: 50%;
     transform: translateX(-50%);
-    width: 250px;
-    height: 250px;
+    width: 55vw;
+    height: 55vw;
+    max-width: 300px;
+    max-height: 300px;
     background: radial-gradient(circle, #ffd27f 0%, #ff944d 60%, transparent 70%);
     border-radius: 50%;
     animation: sunrise 10s forwards;
     animation-delay: 3s;
 }
+
 @keyframes sunrise {
-    to { bottom: 25%; }
+    to { bottom: 28%; }
 }
 
 /* Рассвет */
 .dawn {
     animation: skyChange 12s forwards;
 }
+
 @keyframes skyChange {
     0% { background: radial-gradient(circle at 50% 80%, #0a0a1f 0%, #000 70%); }
     100% { background: linear-gradient(to top, #ff9966, #ff5e62, #3a1c71); }
@@ -102,30 +103,38 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 150px;
+    height: 18vh;
     background: linear-gradient(to top, #111, transparent);
 }
 
 /* Письмо */
 .letter {
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 800px;
+    width: 90%;
+    max-width: 500px;
     text-align: center;
-    font-size: 20px;
+    font-size: 4.5vw;
+    line-height: 1.6;
     white-space: pre-line;
 }
 
-/* Курсор печати */
+@media (min-width: 600px) {
+    .letter {
+        font-size: 18px;
+    }
+}
+
+/* Курсор */
 .cursor {
     display: inline-block;
     width: 2px;
     background: white;
     animation: blink 1s infinite;
 }
+
 @keyframes blink {
     50% { opacity: 0; }
 }
@@ -140,11 +149,13 @@ body {
     <div class="stars"></div>
     <div class="sun"></div>
     <div class="beach"></div>
-    <div class="letter"><span id="text"></span><span class="cursor"></span></div>
+    <div class="letter">
+        <span id="text"></span><span class="cursor"></span>
+    </div>
 </div>
 
 <audio id="music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4bfae0c9a5.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4bfae0c9a5.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -160,7 +171,6 @@ const message = `Дорогая Ксюнька...
 Первый луч солнца.
 Нежный поцелуй.
 Тёплые объятия.
-И ощущение, что эта ночь была только нашей.
 
 13.03.26
 20:00
@@ -186,7 +196,7 @@ function typeWriter() {
     if (i < message.length) {
         textElement.innerHTML += message.charAt(i);
         i++;
-        setTimeout(typeWriter, 40);
+        setTimeout(typeWriter, 35);
     }
 }
 </script>
