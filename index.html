@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -39,11 +38,16 @@ position:fixed;
 inset:0;
 opacity:0;
 transition:opacity 2s ease;
-background:linear-gradient(to top,#02030a 0%, #050510 60%, #000 100%);
-overflow:hidden;
+background:radial-gradient(circle at 50% 80%, #050510 0%, #000 80%);
 }
 
 /* ЗВЁЗДЫ */
+.stars{
+position:absolute;
+width:100%;
+height:100%;
+}
+
 .stars::after{
 content:"";
 position:absolute;
@@ -66,35 +70,6 @@ from{opacity:0.3;}
 to{opacity:1;}
 }
 
-/* МОРЕ */
-.sea{
-position:absolute;
-bottom:0;
-width:100%;
-height:40%;
-background:linear-gradient(to top,#02121f,#032436);
-overflow:hidden;
-}
-
-/* ВОЛНЫ */
-.wave{
-position:absolute;
-width:200%;
-height:100%;
-background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08), transparent 70%);
-animation:waveMove 8s linear infinite;
-}
-
-.wave:nth-child(2){
-animation-duration:12s;
-opacity:0.6;
-}
-
-@keyframes waveMove{
-from{transform:translateX(0);}
-to{transform:translateX(-50%);}
-}
-
 /* СОЛНЦЕ */
 .sun{
 position:absolute;
@@ -105,22 +80,30 @@ width:60vw;
 height:60vw;
 max-width:260px;
 max-height:260px;
-background:radial-gradient(circle,#ffd27f 0%,#ffb36b 50%,transparent 70%);
+background:radial-gradient(circle,#ffd27f 0%,#ff944d 60%,transparent 70%);
 border-radius:50%;
-transition:bottom 18s ease;
-opacity:0.9;
+transition:bottom 12s ease;
 }
 
-/* ПЛАВНЫЙ РАССВЕТ */
+/* РАССВЕТ */
 .dawn{
-background:linear-gradient(to top,#ffb07c 0%, #ff8c6b 40%, #5b3a86 100%);
-transition:background 20s ease;
+background:linear-gradient(to top,#ff9966,#ff5e62,#3a1c71);
+transition:background 12s ease;
+}
+
+/* БЕРЕГ */
+.beach{
+position:absolute;
+bottom:0;
+width:100%;
+height:20vh;
+background:linear-gradient(to top,#111,transparent);
 }
 
 /* ТЕКСТ */
 .letter{
 position:absolute;
-top:52%;
+top:55%;
 left:50%;
 transform:translate(-50%,-50%);
 width:90%;
@@ -129,7 +112,6 @@ text-align:center;
 font-size:4.5vw;
 line-height:1.6;
 white-space:pre-line;
-z-index:5;
 }
 
 @media (min-width:600px){
@@ -156,19 +138,12 @@ animation:blink 1s infinite;
 <div class="scene" id="scene">
 <div class="stars"></div>
 <div class="sun" id="sun"></div>
-
-<div class="sea">
-<div class="wave"></div>
-<div class="wave"></div>
-</div>
-
-<div class="letter">
-<span id="text"></span><span class="cursor"></span>
-</div>
+<div class="beach"></div>
+<div class="letter"><span id="text"></span><span class="cursor"></span></div>
 </div>
 
 <audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4bfae0c9a5.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_8f7b3c1c9b.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -202,14 +177,14 @@ const music = document.getElementById("music");
 btn.onclick = function(){
 btn.style.display="none";
 scene.style.opacity="1";
-music.volume=0.35;
+music.volume = 0.4;
 music.play();
 
-/* Ночь длится 10 секунд */
+/* Ночь длится 8 секунд */
 setTimeout(()=>{
 scene.classList.add("dawn");
-sun.style.bottom="35%";
-},10000);
+sun.style.bottom="30%";
+},8000);
 
 let i=0;
 function typing(){
@@ -225,3 +200,6 @@ setTimeout(typing,2000);
 
 </body>
 </html>
+
+
+
